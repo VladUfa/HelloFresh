@@ -29,7 +29,9 @@ import com.example.hellofresh.data.firaJulius
 import com.example.hellofresh.data.getTime
 import com.example.hellofresh.data.testRecipe
 
-
+/**
+ * Second screen showing chosen recipe
+ */
 @Composable
 fun ViewRecipeScreen(
     uiState: UiState,

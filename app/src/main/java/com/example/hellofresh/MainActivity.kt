@@ -1,5 +1,9 @@
 package com.example.hellofresh
 
+/**
+ *  !!!!!!!!!!!!!!
+ */
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,25 +15,13 @@ import androidx.core.view.WindowCompat
 import com.example.hellofresh.ui.theme.HelloFreshTheme
 
 
-
 class MainActivity : ComponentActivity() {
-//    private val userService = retrofit.create(HelloFreshService::class.java)
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        //val vm = Recipe2ViewModel()
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-//        GlobalScope.launch(Dispatchers.Main) {
-//            try {
-//                val recipes = withContext(Dispatchers.IO) { userService.getRecipes() }
-//                for (recipe in recipes) {
-//                    print(recipe.calories)
-//                }
-//            } catch (e: Exception) {
-//                // Handle error
-//                e.printStackTrace()
-//            }
-//        }
+//        val test = listOf(testRecipe, testRecipe)
 
         setContent {
             HelloFreshTheme {

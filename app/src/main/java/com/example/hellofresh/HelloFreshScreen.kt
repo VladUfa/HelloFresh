@@ -27,10 +27,13 @@ import com.example.hellofresh.ui.screens.ViewRecipeScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.getValue
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.hellofresh.data.Recipe
 import com.example.hellofresh.data.recipeList
 import com.example.hellofresh.data.testDataList
 
-
+/**
+ * List of routes according to applications screens
+ */
 enum class HelloFreshScreen() {
     Start,
     Recipe
@@ -74,12 +77,17 @@ fun HelloFreshAppBar(
 fun HelloFreshApp(
     viewModel: RecipeViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
+    //jsonData: List<Recipe> = recipeList
 ) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = HelloFreshScreen.valueOf(
         backStackEntry?.destination?.route ?: HelloFreshScreen.Start.name
     )
+
+    viewModel.getTodoList()
+    //val jsonData = testDataList
+    val jsonData = viewModel.todoList
 
     Scaffold(
         topBar = {
@@ -92,19 +100,28 @@ fun HelloFreshApp(
     ) { innerPadding ->
         val uiState by viewModel.uiState.collectAsState()
 
+        /**
+         * Initializing NavHost for displaying the current destination
+         */
         NavHost(
             navController = navController,
             startDestination = HelloFreshScreen.Start.name,
             modifier = Modifier.padding(innerPadding)
         ) {
+            /**
+             * Main screen with list of recipes
+             */
             composable(route = HelloFreshScreen.Start.name) {
                 StartHelloFreshScreen(
-                    recipeList,
+                    jsonData,
                     onNextButtonClicked = {
                         viewModel.setRecipeID(it)
                         navController.navigate(HelloFreshScreen.Recipe.name) },
                 )
             }
+            /**
+             * Second screen with chosen recipe
+             */
             composable(route = HelloFreshScreen.Recipe.name) {
                 ViewRecipeScreen(
                     uiState = uiState,

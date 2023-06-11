@@ -8,10 +8,16 @@ import com.example.hellofresh.api.HelloFreshService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Get formatted time preparation string from Json raw data
+ */
 fun getTime(data: Recipe): String {
     return data.time.substring(2, 4)+" min"
 }
 
+/**
+ * Fonts using in the app
+ */
 val firaInika = FontFamily(
     Font(R.font.inika, FontWeight.Normal),
 )
@@ -28,16 +34,14 @@ val firaInder = FontFamily(
 val firaJulius = FontFamily(
     Font(R.font.julius_sans_one, FontWeight.Normal),
 )
+
+/**
+ * List of images for showing difficulty level in layouts
+ */
 val difficultyImages = listOf(
     R.drawable.l1,
     R.drawable.l2,
     R.drawable.l3,
     R.drawable.l4
 )
-private const val BASE_URL = "https://hf-android-app.s3-eu-west-1.amazonaws.com/"
 
-val retrofit = Retrofit.Builder()
-    .baseUrl(BASE_URL)
-    .addConverterFactory(GsonConverterFactory.create())
-    .build()
-//val userService = retrofit.create(HelloFreshService::class.java)

@@ -35,6 +35,10 @@ import com.example.hellofresh.data.getTime
 import com.example.hellofresh.data.testDataList
 import com.example.hellofresh.ui.theme.HelloFreshTheme
 
+
+/**
+ * Main screen with recipes list
+ */
 @Composable
 fun StartHelloFreshScreen(
     helloFreshResults: List<Recipe>,
@@ -89,6 +93,7 @@ fun StartHelloFreshScreen(
                         fontSize = 16.sp,
                         lineHeight = 14.sp
                     )
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = stringResource(
                             R.string.recipe_energy_1,
@@ -96,7 +101,13 @@ fun StartHelloFreshScreen(
                             data.fats,
                             data.proteins
                         ),
-                        fontSize = 16.sp,
+                        fontSize = 14.sp,
+                        lineHeight = 25.sp
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = data.calories,
+                        fontSize = 14.sp,
                         lineHeight = 20.sp
                     )
                 }
