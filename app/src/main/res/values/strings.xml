@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Hello Fresh Recipes Club</string>
+    <string name="back_button">Back</string>
+    <string name="recipe_energy_1">Carbos / Fats / Protein: %1$s / %2$s / %3$s</string>
+    <string name="recipe_energy_2">Carbos: %1$s \nFats: %2$s \nProtein: %3$s</string>
+
+</resources>
