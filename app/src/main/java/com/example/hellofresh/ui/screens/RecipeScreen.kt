@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,11 +22,11 @@ import coil.compose.AsyncImage
 import com.example.hellofresh.R
 import com.example.hellofresh.data.UiState
 import com.example.hellofresh.data.difficultyImages
-import com.example.hellofresh.data.firaInika
-import com.example.hellofresh.data.firaItim
-import com.example.hellofresh.data.firaJulius
 import com.example.hellofresh.data.getTime
 import com.example.hellofresh.data.testRecipe
+import com.example.hellofresh.ui.theme.firaInika
+import com.example.hellofresh.ui.theme.firaItim
+import com.example.hellofresh.ui.theme.firaJulius
 
 /**
  * Second screen showing chosen recipe
@@ -37,7 +36,7 @@ fun ViewRecipeScreen(
     uiState: UiState,
     modifier: Modifier = Modifier
 ){
-    val data = uiState.recipeID
+    val data = uiState.selectedRecipe
     Column(modifier = Modifier.fillMaxWidth().padding(4.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = data.name,
@@ -113,7 +112,7 @@ fun ViewRecipeScreen(
 @Composable
 fun ViewRecipePreview(){
     ViewRecipeScreen(
-        uiState = UiState(recipeID = testRecipe),
+        uiState = UiState(selectedRecipe = testRecipe),
         modifier = Modifier.fillMaxWidth()
     )
 }

@@ -15,25 +15,6 @@ fun getTime(data: Recipe): String {
     return data.time.substring(2, 4)+" min"
 }
 
-/**
- * Fonts using in the app
- */
-val firaInika = FontFamily(
-    Font(R.font.inika, FontWeight.Normal),
-)
-val firaIstok = FontFamily(
-    Font(R.font.istok_web, FontWeight.Normal),
-    Font(R.font.istok_web_bold, FontWeight.Bold),
-)
-val firaItim = FontFamily(
-    Font(R.font.itim, FontWeight.Normal),
-)
-val firaInder = FontFamily(
-    Font(R.font.inder, FontWeight.Normal),
-)
-val firaJulius = FontFamily(
-    Font(R.font.julius_sans_one, FontWeight.Normal),
-)
 
 /**
  * List of images for showing difficulty level in layouts

@@ -17,12 +17,22 @@ class RecipeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
+    private val _recipesList = mutableStateListOf<Recipe>()
+    val recipesList: List<Recipe>
+        get() = _recipesList
+
+    private var errorMessage: String = ""
+
+    init {
+        getRecipesList()
+    }
+
     /**
      * Set the [desiredRecipe] of the list to view in Second Screen.
      */
-    fun setRecipeID(desiredRecipe: Recipe) {
+    fun setRecipe(desiredRecipe: Recipe) {
         _uiState.update { currentState ->
-            currentState.copy(recipeID = desiredRecipe)
+            currentState.copy(selectedRecipe = desiredRecipe)
         }
     }
 
@@ -31,17 +41,13 @@ class RecipeViewModel : ViewModel() {
      * for the view to use to fetch all recipes
 
      */
-    private val _todoList = mutableStateListOf<Recipe>()
-    private var errorMessage: String = ""
-    val todoList: List<Recipe>
-        get() = _todoList
 
-    fun getTodoList() {
+    private fun getRecipesList() {
         viewModelScope.launch {
             val apiService = HelloFreshService.getInstance()
             try {
-                _todoList.clear()
-                _todoList.addAll(apiService.getRecipes())
+                _recipesList.clear()
+                _recipesList.addAll(apiService.getRecipes())
 
             } catch (e: Exception) {
                 errorMessage = e.message.toString()

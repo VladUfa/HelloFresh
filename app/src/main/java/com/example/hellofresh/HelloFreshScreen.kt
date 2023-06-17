@@ -14,27 +14,24 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.hellofresh.data.firaInder
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.hellofresh.ui.RecipeViewModel
 import com.example.hellofresh.ui.screens.StartHelloFreshScreen
 import com.example.hellofresh.ui.screens.ViewRecipeScreen
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.compose.runtime.getValue
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.hellofresh.data.Recipe
-import com.example.hellofresh.data.recipeList
-import com.example.hellofresh.data.testDataList
+import com.example.hellofresh.ui.theme.firaInder
 
 /**
  * List of routes according to applications screens
  */
-enum class HelloFreshScreen() {
+enum class HelloFreshScreen {
     Start,
     Recipe
 }
@@ -45,7 +42,6 @@ enum class HelloFreshScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HelloFreshAppBar(
-    currentScreen: HelloFreshScreen,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier
@@ -75,30 +71,29 @@ fun HelloFreshAppBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HelloFreshApp(
-    viewModel: RecipeViewModel = viewModel(),
+    recipeViewModel: RecipeViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
-    //jsonData: List<Recipe> = recipeList
 ) {
-
+    /**
+     * Check this code later. It is somehow needed to correctly check the expression
+     * navController.previousBackStackEntry != null
+     */
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = HelloFreshScreen.valueOf(
         backStackEntry?.destination?.route ?: HelloFreshScreen.Start.name
     )
 
-    viewModel.getTodoList()
-    //val jsonData = testDataList
-    val jsonData = viewModel.todoList
+    val jsonData = recipeViewModel.recipesList
+    val uiState by recipeViewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = {
             HelloFreshAppBar(
-                currentScreen = currentScreen,
                 canNavigateBack = navController.previousBackStackEntry != null,
                 navigateUp = { navController.navigateUp() }
             )
         }
     ) { innerPadding ->
-        val uiState by viewModel.uiState.collectAsState()
 
         /**
          * Initializing NavHost for displaying the current destination
@@ -115,7 +110,7 @@ fun HelloFreshApp(
                 StartHelloFreshScreen(
                     jsonData,
                     onNextButtonClicked = {
-                        viewModel.setRecipeID(it)
+                        recipeViewModel.setRecipe(it)
                         navController.navigate(HelloFreshScreen.Recipe.name) },
                 )
             }

@@ -28,12 +28,12 @@ import coil.compose.AsyncImage
 import com.example.hellofresh.R
 import com.example.hellofresh.data.Recipe
 import com.example.hellofresh.data.difficultyImages
-import com.example.hellofresh.data.firaInika
-import com.example.hellofresh.data.firaItim
-import com.example.hellofresh.data.firaJulius
 import com.example.hellofresh.data.getTime
 import com.example.hellofresh.data.testDataList
 import com.example.hellofresh.ui.theme.HelloFreshTheme
+import com.example.hellofresh.ui.theme.firaInika
+import com.example.hellofresh.ui.theme.firaItim
+import com.example.hellofresh.ui.theme.firaJulius
 
 
 /**

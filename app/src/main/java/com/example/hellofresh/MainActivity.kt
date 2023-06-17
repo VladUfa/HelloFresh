@@ -17,11 +17,8 @@ import com.example.hellofresh.ui.theme.HelloFreshTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        //val vm = Recipe2ViewModel()
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-//        val test = listOf(testRecipe, testRecipe)
 
         setContent {
             HelloFreshTheme {
